@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
+import javax.xml.transform.Templates;
+
 public class TemplateActivity extends AppCompatActivity {
 
     @Override
@@ -11,5 +15,6 @@ public class TemplateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template);
         getSupportActionBar().setTitle("Template");
+
     }
 }
