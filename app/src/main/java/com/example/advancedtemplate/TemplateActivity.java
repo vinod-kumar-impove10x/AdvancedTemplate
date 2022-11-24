@@ -12,6 +12,8 @@ import javax.xml.transform.Templates;
 public class TemplateActivity extends AppCompatActivity {
 
     public ArrayList<Template> templates;
+    public RecyclerView templateRv;
+    public TemplateAdapter templateAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
