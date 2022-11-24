@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -21,9 +23,18 @@ public class TemplateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template);
         getSupportActionBar().setTitle("Template");
+        handleAddButton();
         setupDta();
         setupTemplates();
 
+    }
+
+    private void handleAddButton() {
+            Button addBtn = findViewById(R.id.button_btn);
+            addBtn.setOnClickListener(view -> {
+                Intent intent = new Intent(this, AddTemplateActivity.class);
+                startActivity(intent);
+            });
     }
 
     private void setupTemplates() {
