@@ -1,6 +1,7 @@
 package com.example.advancedtemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -21,7 +22,16 @@ public class TemplateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_template);
         getSupportActionBar().setTitle("Template");
         setupDta();
+        setupTemplates();
 
+    }
+
+    private void setupTemplates() {
+        templateRv = findViewById(R.id.template_rv);
+        templateRv.setLayoutManager(new LinearLayoutManager(this));
+        templateAdapter = new TemplateAdapter();
+        templateAdapter.setData(templates);
+        templateRv.setAdapter(templateAdapter);
     }
 
     private void setupDta() {
