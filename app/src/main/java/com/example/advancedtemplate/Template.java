@@ -1,6 +1,10 @@
 package com.example.advancedtemplate;
 
-public class Template {
+import com.google.gson.annotations.SerializedName;
 
+public class Template {
+    @SerializedName("_id")
+    public String id;
+    @SerializedName("messageText")
     public String message;
 }

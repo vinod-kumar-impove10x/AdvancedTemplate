@@ -7,10 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.transform.Templates;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TemplateActivity extends AppCompatActivity {
 
@@ -29,12 +35,42 @@ public class TemplateActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchData();
+    }
+
+    private void fetchData() {
+        TemplateApi templateApi = new TemplateApi();
+        TemplateService templateService = templateApi.createTemplateService();
+        Call<List<Template>> call = templateService.fetchTasks();
+        call.enqueue(new Callback<List<Template>>() {
+            @Override
+            public void onResponse(Call<List<Template>> call, Response<List<Template>> response) {
+                List<Template> templates = response.body();
+                templateAdapter.setData(templates);
+            }
+
+            @Override
+            public void onFailure(Call<List<Template>> call, Throwable t) {
+                Toast.makeText(TemplateActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void handleAddButton() {
             Button addBtn = findViewById(R.id.button_btn);
             addBtn.setOnClickListener(view -> {
                 Intent intent = new Intent(this, AddTemplateActivity.class);
                 startActivity(intent);
             });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        fetchData();
     }
 
     private void setupTemplates() {
